@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dental Maestro – Your Smile, Our Priority</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ivory: #FAF7F2;
+      --cream: #F2EDE4;
+      --teal: #1A6B6B;
+      --teal-light: #2A8F8F;
+      --gold: #C9A84C;
+      --gold-light: #E2C87A;
+      --charcoal: #1E2628;
+      --muted: #7A8A8A;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(250,247,242,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.18);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); font-style: italic; }
+
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--charcoal);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 400;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--teal);
+      color: var(--white) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.1em;
+      transition: background 0.3s;
+    }
+    .nav-cta:hover { background: var(--teal-light); }
+    .nav-cta::after { display: none !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-circle {
+      position: absolute;
+      right: -100px; top: 50%;
+      transform: translateY(-50%);
+      width: 680px; height: 680px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #1A6B6B22, #1A6B6B06 70%);
+      border: 1px solid rgba(26,107,107,0.12);
+      animation: floatCircle 8s ease-in-out infinite;
+    }
+    .hero-bg-circle2 {
+      position: absolute;
+      right: 120px; top: 55%;
+      transform: translateY(-50%);
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #C9A84C0A, transparent 70%);
+      border: 1px solid rgba(201,168,76,0.15);
+      animation: floatCircle 10s ease-in-out infinite reverse;
+    }
+    @keyframes floatCircle {
+      0%, 100% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-52%) scale(1.02); }
+    }
+
+    .hero-left {
+      padding: 4rem 5% 4rem 8%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5.2rem);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--teal);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      font-weight: 400;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--charcoal);
+      padding: 0.85rem 2rem;
+      border-radius: 2px;
+      border: 1px solid rgba(30,38,40,0.2);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(30,38,40,0.1);
+      animation: fadeUp 0.8s 0.6s ease both;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .hero-right {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 8% 4rem 2rem;
+      z-index: 2;
+    }
+
+    .hero-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2.5rem;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+      position: relative;
+      animation: fadeRight 0.9s 0.3s ease both;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      border-radius: 12px 12px 0 0;
+    }
+
+    .card-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .stars { color: var(--gold); font-size: 1rem; letter-spacing: 0.05em; }
+    .rating-text { font-size: 0.82rem; color: var(--muted); }
+    .rating-num { font-weight: 500; color: var(--charcoal); }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+    .card-address {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--cream);
+    }
+
+    .card-hours {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+    .card-hours .dot { width: 7px; height: 7px; border-radius: 50%; background: #4CAF50; flex-shrink: 0; }
+    .card-hours strong { font-weight: 500; }
+
+    .card-phone {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      background: var(--cream);
+      border-radius: 6px;
+      padding: 0.7rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--teal);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .card-phone:hover { background: #e5dfd4; }
+
+    .float-badge {
+      position: absolute;
+      bottom: -16px; right: -16px;
+      background: var(--teal);
+      color: var(--white);
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(26,107,107,0.35);
+    }
+    .float-badge strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translateX(24px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── SECTION COMMONS ── */
+    section { position: relative; z-index: 1; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+    .section-tag::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--gold);
+      display: inline-block;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--charcoal);
+    }
+    .section-title em { font-style: italic; color: var(--teal); }
+
+    /* ── SERVICES ── */
+    #services {
+      padding: 7rem 8%;
+      background: var(--charcoal);
+    }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+    .services-header .section-tag { color: var(--gold-light); }
+    .services-header .section-title { color: var(--white); }
+    .services-header p { color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.75; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      padding: 2.5rem;
+      transition: background 0.3s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      transition: width 0.4s ease;
+    }
+    .service-card:hover { background: rgba(255,255,255,0.07); }
+    .service-card:hover::after { width: 100%; }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      border-radius: 8px;
+      background: rgba(26,107,107,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.7rem;
+    }
+
+    .service-desc {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+
+    /* ── WHY CHOOSE ── */
+    #why {
+      padding: 7rem 8%;
+      background: var(--cream);
+    }
+
+    .why-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .why-features { display: flex; flex-direction: column; gap: 2rem; margin-top: 2.5rem; }
+
+    .why-feature {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .why-feature:hover {
+      transform: translateX(6px);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.08);
+    }
+
+    .feature-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--teal), var(--teal-light));
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .feature-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.3rem;
+    }
+    .feature-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+    .why-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .teal-block {
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, var(--teal) 0%, #0e4040 100%);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 2.5rem;
+    }
+    .teal-block::before {
+      content: '🦷';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8rem;
+      opacity: 0.08;
+    }
+    .teal-block-content { position: relative; z-index: 2; }
+    .teal-block-content .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+    .teal-block-content .quote-author {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .gold-accent-box {
+      position: absolute;
+      bottom: -24px; right: -24px;
+      background: var(--gold);
+      width: 120px; height: 120px;
+      border-radius: 8px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      box-shadow: 0 12px 40px rgba(201,168,76,0.4);
+    }
+    .gold-accent-box .big-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+    }
+    .gold-accent-box .small-text { font-size: 0.68rem; color: rgba(255,255,255,0.8); letter-spacing: 0.06em; text-align: center; }
+
+    /* ── REVIEWS ── */
+    #reviews {
+      padding: 7rem 8%;
+      background: var(--ivory);
+    }
+
+    .reviews-header { text-align: center; margin-bottom: 4rem; }
+    .reviews-header .section-tag { justify-content: center; }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .review-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .review-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    }
+    .review-card::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      color: var(--teal);
+      opacity: 0.1;
+      position: absolute;
+      top: 0.5rem; left: 1.2rem;
+      line-height: 1;
+    }
+
+    .review-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 0.08em; }
+    .review-text { font-size: 0.9rem; color: var(--charcoal); line-height: 1.75; margin-bottom: 1.5rem; }
+    .review-author { display: flex; align-items: center; gap: 0.8rem; }
+
+    .avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--teal-light));
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .author-name { font-size: 0.85rem; font-weight: 500; color: var(--charcoal); }
+    .author-type { font-size: 0.73rem; color: var(--muted); }
+
+    /* ── CTA STRIP ── */
+    #cta {
+      background: linear-gradient(120deg, var(--teal) 0%, #0e4040 100%);
+      padding: 5rem 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+      overflow: hidden;
+      position: relative;
+    }
+    #cta::before {
+      content: '✦';
+      position: absolute;
+      font-size: 22rem;
+      color: rgba(255,255,255,0.03);
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .cta-left .section-tag { color: rgba(201,168,76,0.8); }
+    .cta-left .section-title { color: var(--white); }
+    .cta-left p { color: rgba(255,255,255,0.6); font-size: 0.95rem; margin-top: 0.8rem; }
+
+    .cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gold);
+      color: var(--white);
+      padding: 0.9rem 2.2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      font-weight: 400;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: rgba(255,255,255,0.9);
+      padding: 0.9rem 2.2rem;
+      border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.25);
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.06); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 3rem 8% 2rem;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand .nav-logo { font-size: 1.4rem; color: var(--white); text-decoration: none; }
+    .footer-brand .nav-logo span { color: var(--gold); }
+    .footer-brand p { font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.75; margin-top: 0.8rem; max-width: 260px; }
+
+    .footer-col h5 {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+    .footer-col a, .footer-col p {
+      display: block;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      line-height: 1.6;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: rgba(255,255,255,0.8); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; padding-top: 100px; }
+      .hero-left { padding: 3rem 6% 2rem; }
+      .hero-right { padding: 1rem 6% 4rem; justify-content: flex-start; }
+      .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .why-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .why-visual { display: none; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">Dental <span>Maestro</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#cta" class="nav-cta">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-circle"></div>
+    <div class="hero-bg-circle2"></div>
+
+    <div class="hero-left">
+      <div class="hero-tag">Dental Clinic in Nangloi, Delhi</div>
+      <h1 class="hero-title">
+        Your Smile,<br>
+        <em>Our Priority.</em>
+      </h1>
+      <p class="hero-sub">
+        Advanced dental care with a personal touch. From routine check-ups to complete smile makeovers — we guide you every step of the way.
+      </p>
+      <div class="hero-actions">
+        <a href="tel:09971034352" class="btn-primary">📞 Call Now</a>
+        <a href="#services" class="btn-secondary">View Services ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">4.6★</span>
+          <span class="stat-label">Google Rating</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">33+</span>
+          <span class="stat-label">Happy Patients</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">6+</span>
+          <span class="stat-label">Treatments</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="card-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-text"><span class="rating-num">4.6</span> · 33 Reviews</span>
+        </div>
+        <div class="card-title">Dental Maestro</div>
+        <div class="card-address">
+          Shivam Medical Center, near Water Tank,<br>
+          Ishwar Colony, Nangloi Extension,<br>
+          Nangloi, Delhi – 110041
+        </div>
+        <div class="card-hours">
+          <span class="dot"></span>
+          <span><strong>Open Today</strong> &nbsp;·&nbsp; 11:00 AM – 8:00 PM</span>
+        </div>
+        <div class="card-hours" style="margin-top:0.3rem; color: var(--muted);">
+          <span style="width:7px;height:7px;flex-shrink:0;"></span>
+          Mon – Sat &nbsp;·&nbsp; Closed Sundays
+        </div>
+        <a href="tel:09971034352" class="card-phone">
+          📞 &nbsp; 099710 34352
+        </a>
+        <div class="float-badge">
+          <strong>🦷</strong>
+          Book<br>Today
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-header">
+      <div>
+        <div class="section-tag">What We Offer</div>
+        <h2 class="section-title">Complete <em>Dental Care</em><br>Under One Roof</h2>
+      </div>
+      <p>We specialize in a wide range of treatments — from preventive care to complex procedures — all performed with modern technology in a calm, hygienic environment.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🦷</div>
+        <div class="service-name">General Dentistry</div>
+        <p class="service-desc">Regular check-ups, professional cleaning, fillings, and preventive care to keep your teeth healthy year-round.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚕️</div>
+        <div class="service-name">Root Canal Treatment</div>
+        <p class="service-desc">Pain-free RCT procedures guided by digital X-rays for accurate diagnosis and lasting results.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">😁</div>
+        <div class="service-name">Orthodontics</div>
+        <p class="service-desc">Braces and modern aligners for all age groups — straighten your teeth comfortably and confidently.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✨</div>
+        <div class="service-name">Cosmetic Dentistry</div>
+        <p class="service-desc">Teeth whitening, veneers, and complete smile makeovers to help you put your best smile forward.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👶</div>
+        <div class="service-name">Pediatric Dentistry</div>
+        <p class="service-desc">Gentle, child-friendly dental care in a warm environment that makes little ones feel safe and comfortable.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚨</div>
+        <div class="service-name">Emergency Dental Care</div>
+        <p class="service-desc">Quick relief for severe tooth pain. Walk in for urgent dental needs — we're here when you need us most.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE -->
+  <section id="why">
+    <div class="why-inner">
+      <div>
+        <div class="section-tag">Why Choose Us</div>
+        <h2 class="section-title">Dentistry Built on<br><em>Trust & Expertise</em></h2>
+        <div class="why-features">
+          <div class="why-feature">
+            <div class="feature-icon">🎓</div>
+            <div class="feature-text">
+              <h4>Experienced Doctors</h4>
+              <p>Our team ensures accurate diagnosis and personalized treatment plans tailored to your unique dental needs.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="feature-icon">🔬</div>
+            <div class="feature-text">
+              <h4>Advanced Technology</h4>
+              <p>Digital X-rays, modern instruments, and a fully sterile environment for the safest, most precise care possible.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="feature-icon">💬</div>
+            <div class="feature-text">
+              <h4>Patient-Centric Care</h4>
+              <p>We explain every procedure and treatment plan thoroughly so you always feel informed and in control.</p>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="feature-icon">🏥</div>
+            <div class="feature-text">
+              <h4>Comfortable Ambience</h4>
+              <p>A clean, hygienic, and welcoming space designed to make every visit as stress-free as possible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-visual">
+        <div class="teal-block">
+          <div class="teal-block-content">
+            <div class="quote-text">"Came in with severe tooth pain, came out with a smile."</div>
+            <div class="quote-author">— Sanjana Mittal, Patient</div>
+          </div>
+        </div>
+        <div class="gold-accent-box">
+          <span class="big-num">4.6</span>
+          <span class="small-text">Google<br>Rating ★</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="reviews-header">
+      <div class="section-tag">Patient Reviews</div>
+      <h2 class="section-title">Words from Our <em>Happy Patients</em></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Really experienced doctor. Really satisfied with my ortho treatment. The whole process was smooth and the results speak for themselves."</p>
+        <div class="review-author">
+          <div class="avatar">MK</div>
+          <div>
+            <div class="author-name">Mankesh Kumar</div>
+            <div class="author-type">Orthodontics Patient</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"One of the best dental clinics in the region. Clinic hygiene, ambience, and doctor-patient interaction are excellent. Highly recommended!"</p>
+        <div class="review-author">
+          <div class="avatar">VG</div>
+          <div>
+            <div class="author-name">Viraj Gupta</div>
+            <div class="author-type">General Dentistry</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Came in with severe tooth pain, came out with a smile 😊. Doctors are cooperative and generous — they made the whole experience so much less scary."</p>
+        <div class="review-author">
+          <div class="avatar">SM</div>
+          <div>
+            <div class="author-name">Sanjana Mittal</div>
+            <div class="author-type">Emergency Care Patient</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-left">
+      <div class="section-tag">Book an Appointment</div>
+      <h2 class="section-title">Don't Wait for Pain<br><em>to Stop You.</em></h2>
+      <p>Schedule your appointment today and experience dental care that puts your comfort first.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="tel:09971034352" class="btn-gold">📞 Call 099710 34352</a>
+      <a href="https://maps.google.com/?q=Shivam+Medical+Center+Nangloi+Delhi" target="_blank" class="btn-outline-white">📍 Get Directions</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">Dental <span>Maestro</span></a>
+        <p>Advanced dental care with a personal touch. Located in the heart of Nangloi, Delhi — serving smiles every day.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="#services">General Dentistry</a>
+        <a href="#services">Root Canal Treatment</a>
+        <a href="#services">Orthodontics</a>
+        <a href="#services">Cosmetic Dentistry</a>
+        <a href="#services">Pediatric Dentistry</a>
+        <a href="#services">Emergency Care</a>
+      </div>
+      <div class="footer-col">
+        <h5>Visit Us</h5>
+        <p>Shivam Medical Center, near Water Tank, Ishwar Colony, Nangloi Extension, Nangloi, Delhi – 110041</p>
+        <p style="margin-top:0.8rem;">Mon – Sat: 11 AM – 8 PM</p>
+        <p>Sunday: Closed</p>
+        <a href="tel:09971034352" style="margin-top:0.8rem; color: var(--gold) !important;">📞 099710 34352</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Dental Maestro. All rights reserved.</span>
+      <span>Your Smile, Our Priority ✦</span>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .why-feature, .review-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
